@@ -26,6 +26,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
         {
             _selectedImage.enabled = selected != null;
             _healthSlider.gameObject.SetActive(selected != null);
+            _sliderBackground.gameObject.SetActive(selected != null);
             _text.enabled = selected != null;
 
             if (selected != null)
