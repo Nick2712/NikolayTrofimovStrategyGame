@@ -36,8 +36,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
                 {
                     var materials = renderer.sharedMaterials.ToList();
 
-                    if(!materials.Contains(_outLineMask)) materials.Add(_outLineMask);
                     if(!materials.Contains(_outLineFill)) materials.Add(_outLineFill);
+                    if(!materials.Contains(_outLineMask)) materials.Add(_outLineMask);
                     
                     renderer.materials = materials.ToArray();
                 }
