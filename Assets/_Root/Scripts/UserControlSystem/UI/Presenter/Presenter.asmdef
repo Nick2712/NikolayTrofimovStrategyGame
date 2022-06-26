@@ -1,0 +1,19 @@
+{
+    "name": "Presenter",
+    "rootNamespace": "",
+    "references": [
+        "Abstractions",
+        "Model",
+        "Unity.TextMeshPro",
+        "View"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
