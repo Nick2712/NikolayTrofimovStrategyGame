@@ -1,6 +1,6 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
 using NikolayTrofimov_StrategyGame.UserControlSystem.Model;
-using System.Linq;
+using NikolayTrofimov_StrategyGame.UserControlSystem.View;
 using UnityEngine;
 
 
@@ -8,52 +8,38 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
 {
     public class OutLinePresenter : MonoBehaviour
     {
-        [SerializeField] private SelectableValue _selectedObject;
+        [SerializeField] private SelectableValue _selectable;
+        [SerializeField] private Material[] _outLine;
 
-        [SerializeField] private Material _outLineMask;
-        [SerializeField] private Material _outLineFill;
-
-        private Renderer[] _renderers;
+        private ISelectable _currentSelectable;
+        private OutlineSelectorView _currentOutlineSelector;
 
 
         private void Start()
         {
-            _selectedObject.OnSelected += OnSelected;
-
-            _renderers = GetComponentsInChildren<Renderer>();
+            _selectable.OnSelected += OnSelected;
         }
 
-        private void OnSelected(ISelectable selected)
+        private void OnSelected(ISelectable selectable)
         {
-            SetOutLine(selected != null);
+            if (_currentSelectable == selectable) return;
+
+            _currentSelectable = selectable;
+
+            SetSelected(false, _currentOutlineSelector);
+            
+            if(selectable != null)
+            {
+                _currentOutlineSelector = (selectable as Component).GetComponent<OutlineSelectorView>();
+                SetSelected(true, _currentOutlineSelector);
+            }
         }
 
-        private void SetOutLine(bool isSelected)
+        private void SetSelected(bool isSelected, OutlineSelectorView outlineSelector)
         {
-            if (isSelected)
-            {
-                foreach (var renderer in _renderers)
-                {
-                    var materials = renderer.sharedMaterials.ToList();
-
-                    if(!materials.Contains(_outLineFill)) materials.Add(_outLineFill);
-                    if(!materials.Contains(_outLineMask)) materials.Add(_outLineMask);
-                    
-                    renderer.materials = materials.ToArray();
-                }
-            }
-            else
-            {
-                foreach (var renderer in _renderers)
-                {
-                    var materials = renderer.sharedMaterials.ToList();
-
-                    materials.Remove(_outLineMask);
-                    materials.Remove(_outLineFill);
-
-                    renderer.materials = materials.ToArray();
-                }
-            }
+            Debug.Log(isSelected == true ? "Выделяю" : "Снимаю выделение");
+            if (outlineSelector != null)
+                outlineSelector.SetSelected(isSelected, _outLine);
         }
     }
 }

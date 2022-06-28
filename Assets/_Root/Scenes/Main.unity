@@ -2932,6 +2932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2105813226}
   - component: {fileID: 2105813225}
+  - component: {fileID: 2105813227}
   m_Layer: 0
   m_Name: MouseInteraction
   m_TagString: Untagged
@@ -2968,6 +2969,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2105813227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105813224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b700e1679a62db44fac9a24356442776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectable: {fileID: 11400000, guid: 9bf5a21aa7799d340a8a1f16fab3e06b, type: 2}
+  _outLine:
+  - {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
+  - {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
 --- !u!1001 &3523537188485351361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3027,8 +3044,7 @@ PrefabInstance:
       propertyPath: _unitParent
       value: 
       objectReference: {fileID: 159745475}
-    m_RemovedComponents:
-    - {fileID: 6742547756638350078, guid: 4f5ccd3a7096d3540b5275ccb354b4fc, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f5ccd3a7096d3540b5275ccb354b4fc, type: 3}
 --- !u!1001 &6193723181625359234
 PrefabInstance:
