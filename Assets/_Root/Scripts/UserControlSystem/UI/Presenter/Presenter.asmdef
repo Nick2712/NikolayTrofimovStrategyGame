@@ -5,7 +5,9 @@
         "Abstractions",
         "Model",
         "Unity.TextMeshPro",
-        "View"
+        "View",
+        "Utils",
+        "UserControlSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -37,7 +37,6 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
 
         private void SetSelected(bool isSelected, OutlineSelectorView outlineSelector)
         {
-            Debug.Log(isSelected == true ? "Выделяю" : "Снимаю выделение");
             if (outlineSelector != null)
                 outlineSelector.SetSelected(isSelected, _outLine);
         }

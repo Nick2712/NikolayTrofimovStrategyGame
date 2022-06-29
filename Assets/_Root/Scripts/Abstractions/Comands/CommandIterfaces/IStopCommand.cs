@@ -1,7 +1,7 @@
 namespace NikolayTrofimov_StrategyGame.Abstractions
 {
-    public interface IUnitProducer
+    public interface IStopCommand : ICommand
     {
-        void ProduceUnit();
+        
     }
 }
