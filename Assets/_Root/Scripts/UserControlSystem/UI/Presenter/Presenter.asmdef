@@ -7,7 +7,8 @@
         "Unity.TextMeshPro",
         "View",
         "Utils",
-        "UserControlSystem"
+        "UserControlSystem",
+        "Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

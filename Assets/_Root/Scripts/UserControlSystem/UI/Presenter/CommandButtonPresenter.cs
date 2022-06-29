@@ -1,10 +1,9 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
+using NikolayTrofimov_StrategyGame.Core;
 using NikolayTrofimov_StrategyGame.UserControlSystem.Model;
 using NikolayTrofimov_StrategyGame.UserControlSystem.View;
-using NikolayTrofimov_StrategyGame.UserControlSystem;
 using NikolayTrofimov_StrategyGame.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,17 +44,25 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
 
         private void OnButtonClick(ICommandExecutor commandExecutor)
         {
-            var unitProducer = commandExecutor as CommandExecutorBase<IProduceUnitCommand>;
-            if(unitProducer != null)
-            {
-                unitProducer.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommand()));
-                return;
-            }
+            if (TryExecuteSpecificCommand<IProduceUnitCommand, ProduceUnitCommand>(commandExecutor)) return;
+            if (TryExecuteSpecificCommand<IAttackCommand, AttackCommand>(commandExecutor)) return;
+            if (TryExecuteSpecificCommand<IMoveCommand, MoveCommand>(commandExecutor)) return;
+            if (TryExecuteSpecificCommand<IPatrolCommand, PatrolCommand>(commandExecutor)) return;
+            if (TryExecuteSpecificCommand<IStopCommand, StopCommand>(commandExecutor)) return;
 
             throw new ApplicationException($"{nameof(CommandButtonPresenter)}.{nameof(OnButtonClick)}: " + 
                 $"Unknown type of commands executor: {commandExecutor.GetType().FullName}!");
         }
 
-
+        private bool TryExecuteSpecificCommand<T, U>(ICommandExecutor commandExecutor) where T : ICommand where U : T, new()
+        {
+            var unitProducer = commandExecutor as CommandExecutorBase<T>;
+            if (unitProducer != null)
+            {
+                unitProducer.ExecuteSpecificCommand(_context.Inject(new U()));
+                return true;
+            }
+            return false;
+        }
     }
 }

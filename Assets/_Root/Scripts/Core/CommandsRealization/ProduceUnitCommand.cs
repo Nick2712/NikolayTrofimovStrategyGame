@@ -3,7 +3,7 @@ using NikolayTrofimov_StrategyGame.Utils;
 using UnityEngine;
 
 
-namespace NikolayTrofimov_StrategyGame.UserControlSystem
+namespace NikolayTrofimov_StrategyGame.Core
 {
     public class ProduceUnitCommand : IProduceUnitCommand
     {

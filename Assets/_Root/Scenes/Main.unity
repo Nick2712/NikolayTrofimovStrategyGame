@@ -348,8 +348,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 359323722}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1002,11 +1001,6 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3523537188804299145, guid: 4f5ccd3a7096d3540b5275ccb354b4fc, type: 3}
   m_PrefabInstance: {fileID: 3523537188485351361}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &359323722 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-  m_PrefabInstance: {fileID: 6193723181625359234}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &373120609
 GameObject:
@@ -3801,60 +3795,3 @@ PrefabInstance:
       objectReference: {fileID: 159745475}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f5ccd3a7096d3540b5275ccb354b4fc, type: 3}
---- !u!1001 &6193723181625359234
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 159745475}
-    m_Modifications:
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267379144, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193723181267484648, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
-      propertyPath: m_Name
-      value: Chomper
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 07d7dfa273a21e44589ed48435b33992, type: 3}
