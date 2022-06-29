@@ -1,6 +1,6 @@
 using System;
+using System.Linq;
 using System.Reflection;
-
 
 
 namespace NikolayTrofimov_StrategyGame.Utils
@@ -12,9 +12,14 @@ namespace NikolayTrofimov_StrategyGame.Utils
         public static T Inject<T>(this AssetsContext context, T target)
         {
             var targetType = target.GetType();
-            var allFields = targetType.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            var allFields = targetType.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).ToList();
+            while(targetType.BaseType != typeof(object))
+            {
+                targetType = targetType.BaseType;
+                allFields.AddRange(targetType.GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance));
+            }
 
-            for (int i = 0; i < allFields.Length; i++)
+            for (int i = 0; i < allFields.Count; i++)
             {
                 var fieldInfo = allFields[i];
                 var injectAssetAttribute = fieldInfo.GetCustomAttribute(_injectAssetAttributeType) as InjectAssetAttribute;

@@ -44,7 +44,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
 
         private void OnButtonClick(ICommandExecutor commandExecutor)
         {
-            if (TryExecuteSpecificCommand<IProduceUnitCommand, ProduceUnitCommand>(commandExecutor)) return;
+            if (TryExecuteSpecificCommand<IProduceUnitCommand, ProduceUnitCommandHeir>(commandExecutor)) return;
             if (TryExecuteSpecificCommand<IAttackCommand, AttackCommand>(commandExecutor)) return;
             if (TryExecuteSpecificCommand<IMoveCommand, MoveCommand>(commandExecutor)) return;
             if (TryExecuteSpecificCommand<IPatrolCommand, PatrolCommand>(commandExecutor)) return;
