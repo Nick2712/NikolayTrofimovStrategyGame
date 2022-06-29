@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "Abstractions",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Utils"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

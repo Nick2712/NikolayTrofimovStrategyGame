@@ -1,13 +1,11 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
-using System.Linq;
 using UnityEngine;
 
 
 namespace NikolayTrofimov_StrategyGame.Core
 {
-    public sealed class MainBuilding : MonoBehaviour, IUnitProducer, ISelectable
+    public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
     {
-        [SerializeField] private GameObject _unitPrefab;
         [SerializeField] private Transform _unitParent;
 
         [SerializeField] private float _maxHealth = 1000;
@@ -15,15 +13,14 @@ namespace NikolayTrofimov_StrategyGame.Core
 
         [SerializeField] private float _health = 1000;
 
-
         public float Health => _health;
         public float MaxHeath => _maxHealth;
         public Sprite Icon => _icon;
 
         
-        public void ProduceUnit()
+        public override void ExecuteSpecificCommand(IProduceUnitCommand command)
         {
-            Instantiate(_unitPrefab, 
+            Instantiate(command.UnitPrefab, 
                 new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)), 
                 Quaternion.identity, 
                 _unitParent);

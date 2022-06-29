@@ -1,10 +1,7 @@
 {
-    "name": "Core",
+    "name": "Utils",
     "rootNamespace": "",
-    "references": [
-        "Abstractions",
-        "Utils"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
