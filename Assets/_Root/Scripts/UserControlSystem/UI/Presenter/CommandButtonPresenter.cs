@@ -1,11 +1,9 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
-using NikolayTrofimov_StrategyGame.Core;
 using NikolayTrofimov_StrategyGame.UserControlSystem.Model;
 using NikolayTrofimov_StrategyGame.UserControlSystem.View;
-using NikolayTrofimov_StrategyGame.Utils;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
@@ -14,23 +12,27 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
     {
         [SerializeField] private SelectableValue _selectable;
         [SerializeField] private CommandButtonsView _view;
-        [SerializeField] private AssetsContext _context;
+
+        [Inject] private CommandButtonsModel _model;
 
         private ISelectable _currentSelectable;
 
 
         private void Start()
         {
+            _view.OnClick += _model.OnCommandButtonClicked;
+            _model.OnCommandSent += _view.UnblockAllInteractions;
+            _model.OnCommandCancel += _view.UnblockAllInteractions;
+            _model.OnCommandAccepted += _view.BlockInteractions;
+
             _selectable.OnSelected += OnSelected;
             OnSelected(_selectable.CurrentValue);
-
-            _view.OnClick += OnButtonClick;
         }
 
         private void OnSelected(ISelectable selectable)
         {
             if (_currentSelectable == selectable) return;
-
+            if (_currentSelectable != null) _model.OnSelectionChanged();
             _currentSelectable = selectable;
 
             _view.Clear();
@@ -40,29 +42,6 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
                 commandExecutors.AddRange((selectable as Component).GetComponentsInParent<ICommandExecutor>());
                 _view.MakeLayout(commandExecutors);
             }
-        }
-
-        private void OnButtonClick(ICommandExecutor commandExecutor)
-        {
-            if (TryExecuteSpecificCommand<IProduceUnitCommand, ProduceUnitCommandHeir>(commandExecutor)) return;
-            if (TryExecuteSpecificCommand<IAttackCommand, AttackCommand>(commandExecutor)) return;
-            if (TryExecuteSpecificCommand<IMoveCommand, MoveCommand>(commandExecutor)) return;
-            if (TryExecuteSpecificCommand<IPatrolCommand, PatrolCommand>(commandExecutor)) return;
-            if (TryExecuteSpecificCommand<IStopCommand, StopCommand>(commandExecutor)) return;
-
-            throw new ApplicationException($"{nameof(CommandButtonPresenter)}.{nameof(OnButtonClick)}: " + 
-                $"Unknown type of commands executor: {commandExecutor.GetType().FullName}!");
-        }
-
-        private bool TryExecuteSpecificCommand<T, U>(ICommandExecutor commandExecutor) where T : ICommand where U : T, new()
-        {
-            var unitProducer = commandExecutor as CommandExecutorBase<T>;
-            if (unitProducer != null)
-            {
-                unitProducer.ExecuteSpecificCommand(_context.Inject(new U()));
-                return true;
-            }
-            return false;
         }
     }
 }
