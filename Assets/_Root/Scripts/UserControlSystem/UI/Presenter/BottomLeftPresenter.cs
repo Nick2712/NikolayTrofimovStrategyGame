@@ -32,8 +32,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
             if (selected != null)
             {
                 _selectedImage.sprite = selected.Icon;
-                _text.text = $"{selected.Health}/{selected.MaxHeath}";
-                var healthSliderAmount = selected.Health / selected.MaxHeath;
+                _text.text = $"{selected.Health}/{selected.MaxHealth}";
+                var healthSliderAmount = selected.Health / selected.MaxHealth;
                 _healthSlider.fillAmount = healthSliderAmount;
                 var color = Color.Lerp(Color.red, Color.green, healthSliderAmount);
                 _healthSlider.color = color;

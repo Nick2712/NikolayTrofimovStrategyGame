@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NikolayTrofimov_StrategyGame.Core
 {
-    public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
+    public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable, IAttackable
     {
         [SerializeField] private Transform _unitParent;
 
@@ -14,10 +14,11 @@ namespace NikolayTrofimov_StrategyGame.Core
         [SerializeField] private float _health = 1000;
 
         public float Health => _health;
-        public float MaxHeath => _maxHealth;
+        public float MaxHealth => _maxHealth;
         public Sprite Icon => _icon;
+        public Transform PivotPoint => transform;
 
-        
+
         public override void ExecuteSpecificCommand(IProduceUnitCommand command)
         {
             Instantiate(command.UnitPrefab, 

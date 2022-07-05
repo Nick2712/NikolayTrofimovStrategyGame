@@ -384,6 +384,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _legacyContext: {fileID: 11400000, guid: c832b08113d237d4891b204b323126ea, type: 2}
   _vector3Value: {fileID: 11400000, guid: 5f9f8d7107add6b4e8164aea1715dc50, type: 2}
+  _attackableValue: {fileID: 11400000, guid: f07377dde69e86144befc473469bdb83, type: 2}
+  _selectableValue: {fileID: 11400000, guid: 9bf5a21aa7799d340a8a1f16fab3e06b, type: 2}
 --- !u!114 &160968752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3783,6 +3785,7 @@ MonoBehaviour:
   _selectedObject: {fileID: 11400000, guid: 9bf5a21aa7799d340a8a1f16fab3e06b, type: 2}
   _groundClickRMB: {fileID: 11400000, guid: 5f9f8d7107add6b4e8164aea1715dc50, type: 2}
   _groundTransform: {fileID: 1125571960}
+  _attackablesRMB: {fileID: 11400000, guid: f07377dde69e86144befc473469bdb83, type: 2}
 --- !u!4 &2105813226
 Transform:
   m_ObjectHideFlags: 0
