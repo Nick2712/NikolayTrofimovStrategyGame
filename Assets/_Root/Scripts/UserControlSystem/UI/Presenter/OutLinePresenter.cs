@@ -17,7 +17,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
 
         private void Start()
         {
-            _selectable.OnSelected += OnSelected;
+            _selectable.OnNewValue += OnSelected;
         }
 
         private void OnSelected(ISelectable selectable)

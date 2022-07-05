@@ -8,7 +8,7 @@ namespace NikolayTrofimov_StrategyGame.Core
     {
         public override void ExecuteSpecificCommand(IMoveCommand command)
         {
-            Debug.Log("двигаюсь");
+            Debug.Log($"{name} двигается в {command.Target}");
         }
     }
 }

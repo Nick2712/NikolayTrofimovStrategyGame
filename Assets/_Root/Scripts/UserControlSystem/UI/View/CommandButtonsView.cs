@@ -32,19 +32,43 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.View
             _buttonsByExecutorType.Add(typeof(CommandExecutorBase<IProduceUnitCommand>), _produceUnitButton);
         }
 
+        public void BlockInteractions(ICommandExecutor ce)
+        {
+            UnblockAllInteractions();
+            GetButtonGameObjectByType(ce.GetType()).GetComponent<Selectable>().interactable = false;
+        }
+
+        public void UnblockAllInteractions()
+        {
+            SetInteractable(true);
+        }
+
+        private void SetInteractable(bool value)
+        {
+            _attackButton.GetComponent<Selectable>().interactable = value;
+            _moveButton.GetComponent<Selectable>().interactable = value;
+            _patrolButton.GetComponent<Selectable>().interactable = value;
+            _stopButton.GetComponent<Selectable>().interactable = value;
+            _produceUnitButton.GetComponent<Selectable>().interactable = value;
+        }
+
         public void MakeLayout(List<ICommandExecutor> commandExecutors)
         {
             foreach(var currentExecutor in commandExecutors)
             {
-                var buttonGameObject = _buttonsByExecutorType
-                    .First(type => type
-                        .Key
-                        .IsInstanceOfType(currentExecutor))
-                    .Value;
+                var buttonGameObject = GetButtonGameObjectByType(currentExecutor.GetType());
                 buttonGameObject.SetActive(true);
                 var button = buttonGameObject.GetComponent<Button>();
                 button.onClick.AddListener(() => OnClick?.Invoke(currentExecutor));
             }
+        }
+
+        private GameObject GetButtonGameObjectByType(Type executorInstanceType)
+        {
+            return _buttonsByExecutorType
+                .Where(type => type.Key.IsAssignableFrom(executorInstanceType))
+                .First()
+                .Value;
         }
 
         public void Clear()

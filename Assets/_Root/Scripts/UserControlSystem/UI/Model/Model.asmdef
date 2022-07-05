@@ -2,7 +2,10 @@
     "name": "Model",
     "rootNamespace": "",
     "references": [
-        "Abstractions"
+        "Abstractions",
+        "Core",
+        "Utils",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
