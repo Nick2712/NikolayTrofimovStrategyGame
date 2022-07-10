@@ -7,12 +7,10 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
 {
     public abstract class ScriptableObjectValueBase<T> : ScriptableObject, IAwaitable<T>
     {
-        public class NewValueNotifier<TAwaited> : IAwaiter<TAwaited>
+        public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
         {
             private readonly ScriptableObjectValueBase<TAwaited> _scriptableObjectValueBase;
-            private TAwaited _result;
-            private Action _continuation;
-            private bool _isCompleted;
+            
 
             public NewValueNotifier(ScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
             {
@@ -28,15 +26,6 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
                 _isCompleted = true;
                 _continuation?.Invoke();
             }
-
-            public void OnCompleted(Action continuation)
-            {
-                if (_isCompleted) continuation?.Invoke();
-                else _continuation = continuation;
-            }
-
-            public bool IsCompleted => _isCompleted;
-            public TAwaited GetResult() => _result;
         }
 
         public T CurrentValue { get; private set; }
@@ -48,9 +37,6 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             OnNewValue?.Invoke(CurrentValue);
         }
 
-        public IAwaiter<T> GetAwaiter()
-        {
-            return new NewValueNotifier<T>(this);
-        }
+        public IAwaiter<T> GetAwaiter() => new NewValueNotifier<T>(this);
     }
 }
