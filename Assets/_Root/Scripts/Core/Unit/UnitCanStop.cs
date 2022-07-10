@@ -1,14 +1,17 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
-using UnityEngine;
+using System.Threading;
 
 
 namespace NikolayTrofimov_StrategyGame.Core
 {
     public sealed class UnitCanStop : CommandExecutorBase<IStopCommand>
     {
+        public CancellationTokenSource CancellationTokenSource;
+
+
         public override void ExecuteSpecificCommand(IStopCommand command)
         {
-            Debug.Log("стою");
+            CancellationTokenSource?.Cancel();
         }
     }
 }

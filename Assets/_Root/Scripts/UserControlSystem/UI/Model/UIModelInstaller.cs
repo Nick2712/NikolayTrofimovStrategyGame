@@ -28,6 +28,9 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             Container.Bind<CommandCreatorBase<IPatrolCommand>>().To<PatrolCommandCommandCreator>().AsTransient();
 
             Container.Bind<CommandButtonsModel>().AsTransient();
+
+            Container.Bind<IAwaitable<IAttackable>>().FromInstance(_attackableValue);
+            Container.Bind<IAwaitable<Vector3>>().FromInstance(_vector3Value);
         }
     }
 }
