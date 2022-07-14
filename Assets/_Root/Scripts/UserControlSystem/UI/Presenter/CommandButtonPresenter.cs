@@ -4,6 +4,7 @@ using NikolayTrofimov_StrategyGame.UserControlSystem.View;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using UniRx;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
@@ -25,8 +26,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
             _model.OnCommandCancel += _view.UnblockAllInteractions;
             _model.OnCommandAccepted += _view.BlockInteractions;
 
-            _selectable.OnNewValue += OnSelected;
-            OnSelected(_selectable.CurrentValue);
+            _selectable.ReactiveValue.Subscribe(OnSelected);
+            OnSelected(_selectable.ReactiveValue.Value);
         }
 
         private void OnSelected(ISelectable selectable)

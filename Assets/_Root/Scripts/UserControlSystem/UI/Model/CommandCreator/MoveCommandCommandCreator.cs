@@ -4,6 +4,7 @@ using NikolayTrofimov_StrategyGame.Utils;
 using System;
 using UnityEngine;
 using Zenject;
+using UniRx;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
@@ -17,7 +18,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         [Inject]
         private void Init(Vector3Value groundClicks)
         {
-            groundClicks.OnNewValue += OnNewValue;
+            //groundClicks.OnNewValue += OnNewValue;
+            groundClicks.ReactiveValue.Subscribe(OnNewValue);
         }
 
         private void OnNewValue(Vector3 groundClick)

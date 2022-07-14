@@ -1,5 +1,6 @@
 using NikolayTrofimov_StrategyGame.Utils;
 using System;
+using UniRx;
 using UnityEngine;
 
 
@@ -10,17 +11,17 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
         {
             private readonly ScriptableObjectValueBase<TAwaited> _scriptableObjectValueBase;
-            
+            private readonly IDisposable _disposable;
 
             public NewValueNotifier(ScriptableObjectValueBase<TAwaited> scriptableObjectValueBase)
             {
                 _scriptableObjectValueBase = scriptableObjectValueBase;
-                _scriptableObjectValueBase.OnNewValue += OnNewValue;
+                _disposable = _scriptableObjectValueBase.ReactiveValue.Subscribe(OnNewValue);
             }
 
             private void OnNewValue(TAwaited obj)
             {
-                _scriptableObjectValueBase.OnNewValue -= OnNewValue;
+                _disposable.Dispose();
 
                 _result = obj;
                 _isCompleted = true;
@@ -28,13 +29,13 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             }
         }
 
-        public T CurrentValue { get; private set; }
-        public Action<T> OnNewValue;
+
+        public readonly ReactiveProperty<T> ReactiveValue = new();
+        
 
         public void SetValue(T value)
         {
-            CurrentValue = value;
-            OnNewValue?.Invoke(CurrentValue);
+            ReactiveValue.Value = value;
         }
 
         public IAwaiter<T> GetAwaiter() => new NewValueNotifier<T>(this);

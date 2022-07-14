@@ -3,6 +3,7 @@ using NikolayTrofimov_StrategyGame.UserControlSystem.Model;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
@@ -19,7 +20,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
 
         private void Start()
         {
-            _selectedValue.OnNewValue += OnSelected;
+            _selectedValue.ReactiveValue.Subscribe(OnSelected);
         }
 
         private void OnSelected(ISelectable selected)
