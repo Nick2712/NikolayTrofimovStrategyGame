@@ -2,6 +2,7 @@ using NikolayTrofimov_StrategyGame.Abstractions;
 using NikolayTrofimov_StrategyGame.UserControlSystem.Model;
 using NikolayTrofimov_StrategyGame.UserControlSystem.View;
 using UnityEngine;
+using UniRx;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
@@ -17,7 +18,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
 
         private void Start()
         {
-            _selectable.OnNewValue += OnSelected;
+            _selectable.ReactiveValue.Subscribe(OnSelected);
         }
 
         private void OnSelected(ISelectable selectable)

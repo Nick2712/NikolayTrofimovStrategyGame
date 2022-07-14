@@ -4,6 +4,7 @@ using NikolayTrofimov_StrategyGame.Utils;
 using System;
 using UnityEngine;
 using Zenject;
+using UniRx;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
@@ -19,12 +20,12 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         [Inject]
         private void Init(Vector3Value groundClick)
         {
-            groundClick.OnNewValue += OnNewValue;
+            groundClick.ReactiveValue.Subscribe(OnNewValue);
         }
 
         private void OnNewValue(Vector3 groundClick)
         {
-            _creationCallback?.Invoke(_context.Inject(new PatrolCommand(_selectable.CurrentValue.PivotPoint.position, groundClick)));
+            _creationCallback?.Invoke(_context.Inject(new PatrolCommand(_selectable.ReactiveValue.Value.PivotPoint.position, groundClick)));
             _creationCallback = null;
         }
 

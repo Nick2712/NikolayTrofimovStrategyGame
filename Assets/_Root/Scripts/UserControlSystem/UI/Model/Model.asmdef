@@ -5,7 +5,8 @@
         "Abstractions",
         "Core",
         "Utils",
-        "Zenject"
+        "Zenject",
+        "UniRx"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
