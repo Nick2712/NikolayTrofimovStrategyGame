@@ -18,7 +18,6 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         [Inject]
         private void Init(Vector3Value groundClicks)
         {
-            //groundClicks.OnNewValue += OnNewValue;
             groundClicks.ReactiveValue.Subscribe(OnNewValue);
         }
 

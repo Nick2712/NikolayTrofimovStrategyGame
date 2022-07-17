@@ -1,10 +1,11 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
+using NikolayTrofimov_StrategyGame.Core;
 using System;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
 {
-    public abstract class CommandCreatorBase<T> where T : ICommand
+    public abstract class CommandCreatorBase<T> where T : class, ICommand
     {
         public ICommandExecutor ProcessCommandExecutor (ICommandExecutor commandExecutor, Action<T> callback)
         {

@@ -1,6 +1,8 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
+using System.Threading.Tasks;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 
 namespace NikolayTrofimov_StrategyGame.Core
@@ -9,6 +11,8 @@ namespace NikolayTrofimov_StrategyGame.Core
     {
         [SerializeField] private Transform _unitsParent;
         [SerializeField] private int _maximumUnitsInQueue = 6;
+
+        [Inject] private readonly DiContainer _diContainer;
 
         public IReadOnlyReactiveCollection<IUnitProductionTask> Queue => _queue;
         private ReactiveCollection<IUnitProductionTask> _queue = new();
@@ -24,7 +28,7 @@ namespace NikolayTrofimov_StrategyGame.Core
             {
                 RemoveTaskAtIndex(0);
                 Vector3 position = new(Random.Range(-10, 10), 0, Random.Range(-10, 10));
-                Instantiate(innerTask.UnitPrefab, position, Quaternion.identity, _unitsParent);
+                _diContainer.InstantiatePrefab(innerTask.UnitPrefab, position, Quaternion.identity, _unitsParent);
             }
         }
 
@@ -39,7 +43,7 @@ namespace NikolayTrofimov_StrategyGame.Core
             _queue.RemoveAt(_queue.Count - 1);
         }
 
-        public override void ExecuteSpecificCommand(IProduceUnitCommand command)
+        public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
         {
             if(_queue.Count < _maximumUnitsInQueue)
                 _queue.Add(new UnitProductionTask(command.ProductionTime, command.Icon, command.UnitPrefab, command.UnitName));

@@ -1,6 +1,7 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
 using NikolayTrofimov_StrategyGame.Utils;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +18,7 @@ namespace NikolayTrofimov_StrategyGame.Core
         private static readonly int _idle = Animator.StringToHash("Idle");
 
 
-        public override async void ExecuteSpecificCommand(IMoveCommand command)
+        public override async Task ExecuteSpecificCommand(IMoveCommand command)
         {
             GetComponent<NavMeshAgent>().destination = command.Target;
             _animator.SetTrigger(_walk);
