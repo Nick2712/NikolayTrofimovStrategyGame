@@ -15,10 +15,10 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
 
         private Action<IMoveCommand> _creationCallback;
 
+
         [Inject]
         private void Init(Vector3Value groundClicks)
         {
-            //groundClicks.OnNewValue += OnNewValue;
             groundClicks.ReactiveValue.Subscribe(OnNewValue);
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NikolayTrofimov_StrategyGame.Core
 {
-    public sealed class Unit : MonoBehaviour, ISelectable, IAttackable
+    public sealed class Unit : MonoBehaviour, ISelectable, IAttackable, IUnit
     {
         [SerializeField] private int _maxHealth = 100;
         [SerializeField] private Sprite _icon;
