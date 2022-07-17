@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4545064672333208288}
   - component: {fileID: 3689730266168982948}
+  - component: {fileID: 3373335489592504675}
+  - component: {fileID: 4955684988743495397}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -45,6 +47,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &3373335489592504675
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723583817678362816}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
+--- !u!114 &4955684988743495397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723583817678362816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82841800e47e75643a318d19fc0a744e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6193723181267484160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,7 +3002,6 @@ GameObject:
   - component: {fileID: 1429122921550250208}
   - component: {fileID: 8751984828109416593}
   - component: {fileID: 761942603450177241}
-  - component: {fileID: 214224867722127701}
   - component: {fileID: -6121995892556096241}
   - component: {fileID: 6144513729664007219}
   - component: {fileID: 6217294871140169198}
@@ -3133,19 +3162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 8751984828109416593}
---- !u!114 &214224867722127701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6193723181267484648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c4d9eb012b0414a8b5411ae2f6024d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: 8751984828109416593}
+  _collisionDetector: {fileID: 4955684988743495397}
+  _throttleFrames: 60
+  _continuityThreshold: 10
 --- !u!114 &-6121995892556096241
 MonoBehaviour:
   m_ObjectHideFlags: 0
