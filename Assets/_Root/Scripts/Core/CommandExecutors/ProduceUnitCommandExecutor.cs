@@ -27,8 +27,10 @@ namespace NikolayTrofimov_StrategyGame.Core
             if(innerTask.TimeLeft <= 0)
             {
                 RemoveTaskAtIndex(0);
-                Vector3 position = new(Random.Range(-10, 10), 0, Random.Range(-10, 10));
-                _diContainer.InstantiatePrefab(innerTask.UnitPrefab, position, Quaternion.identity, _unitsParent);
+                var instance = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, transform.position, Quaternion.identity, _unitsParent);
+                var queue = instance.GetComponent<ICommandsQueue>();
+                var mainBuilding = GetComponent<MainBuilding>();
+                queue.EnqueueCommand(new MoveCommand(mainBuilding.RallyPoint));
             }
         }
 

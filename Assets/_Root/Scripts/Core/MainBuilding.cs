@@ -15,5 +15,7 @@ namespace NikolayTrofimov_StrategyGame.Core
         public float MaxHealth => _maxHealth;
         public Sprite Icon => _icon;
         public Transform PivotPoint => transform;
+
+        public Vector3 RallyPoint { get; set; }
     }
 }
