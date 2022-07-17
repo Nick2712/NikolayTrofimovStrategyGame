@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
 {
-    public abstract class ScriptableObjectValueBase<T> : ScriptableObject, IAwaitable<T>
+    public abstract class ScriptableObjectValueBase<T> : ScriptableObject, IAwaitable<T>, IObservable<T>
     {
         public class NewValueNotifier<TAwaited> : AwaiterBase<TAwaited>
         {
@@ -39,5 +39,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         }
 
         public IAwaiter<T> GetAwaiter() => new NewValueNotifier<T>(this);
+
+        public IDisposable Subscribe(IObserver<T> observer) => ReactiveValue.Subscribe(observer);
     }
 }

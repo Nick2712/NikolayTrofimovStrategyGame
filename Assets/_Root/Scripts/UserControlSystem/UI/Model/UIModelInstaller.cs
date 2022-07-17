@@ -13,6 +13,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         [SerializeField] private AttackableValue _attackableValue;
         [SerializeField] private SelectableValue _selectableValue;
 
+        [SerializeField] private Sprite _chomperSprite;
 
         public override void InstallBindings()
         {
@@ -31,6 +32,12 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
 
             Container.Bind<IAwaitable<IAttackable>>().FromInstance(_attackableValue);
             Container.Bind<IAwaitable<Vector3>>().FromInstance(_vector3Value);
+
+            Container.Bind<float>().WithId("Chomper").FromInstance(5f);
+            Container.Bind<string>().WithId("Chomper").FromInstance("Chomper");
+            Container.Bind<Sprite>().WithId("Chomper").FromInstance(_chomperSprite);
+
+            Container.Bind<BottomCenterModel>().AsSingle();
         }
     }
 }

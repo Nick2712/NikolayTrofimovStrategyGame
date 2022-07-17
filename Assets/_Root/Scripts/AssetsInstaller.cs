@@ -1,5 +1,7 @@
+using NikolayTrofimov_StrategyGame.Abstractions;
 using NikolayTrofimov_StrategyGame.UserControlSystem.Model;
 using NikolayTrofimov_StrategyGame.Utils;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -17,6 +19,8 @@ namespace NikolayTrofimov_StrategyGame
         public override void InstallBindings()
         {
             Container.BindInstances(_legacyContext, _groundClickRMB, _attackableClickRMB, _selectables);
+
+            Container.Bind<IObservable<ISelectable>>().FromInstance(_selectables);
         }
     }
 }
