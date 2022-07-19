@@ -3110,6 +3110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa03d10074da55c429681c5a0e950c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stop: {fileID: 761942603450177241}
+  _animator: {fileID: 6193723181260180522}
+  _stopCommandExecutor: {fileID: 3685101011312804116}
 --- !u!114 &3685101011312804116
 MonoBehaviour:
   m_ObjectHideFlags: 0
