@@ -30,6 +30,10 @@ namespace NikolayTrofimov_StrategyGame.Core
                 var instance = _diContainer.InstantiatePrefab(innerTask.UnitPrefab, transform.position, Quaternion.identity, _unitsParent);
                 var queue = instance.GetComponent<ICommandsQueue>();
                 var mainBuilding = GetComponent<MainBuilding>();
+
+                var factionMember = instance.GetComponent<FactionMember>();
+                factionMember.SetFaction(GetComponent<FactionMember>().FactionId);
+
                 queue.EnqueueCommand(new MoveCommand(mainBuilding.RallyPoint));
             }
         }

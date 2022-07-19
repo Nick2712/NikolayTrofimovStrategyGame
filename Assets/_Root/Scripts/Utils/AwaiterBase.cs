@@ -18,5 +18,12 @@ namespace NikolayTrofimov_StrategyGame.Utils
 
         public bool IsCompleted => _isCompleted;
         public TAwaited GetResult() => _result;
+
+        protected void OnWaitFinish(TAwaited result)
+        {
+            _result = result;
+            _isCompleted = true;
+            _continuation?.Invoke();
+        }
     }
 }
