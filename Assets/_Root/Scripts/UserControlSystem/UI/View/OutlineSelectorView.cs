@@ -17,6 +17,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.View
 
         public void SetSelected(bool isSelected, Material[] selectMaterials)
         {
+            if (this == null) return;
             if (_isSelected == isSelected) return;
 
             foreach (var renderer in _renderers)
