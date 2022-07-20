@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NikolayTrofimov_StrategyGame.Core
 {
-    public sealed class Unit : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDealer
+    public sealed class Unit : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDealer, IAutomaticAttacker
     {
         [SerializeField] private int _maxHealth = 100;
         [SerializeField] private Sprite _icon;
@@ -14,6 +14,8 @@ namespace NikolayTrofimov_StrategyGame.Core
         [SerializeField] private UnitCanStop _stopCommand;
 
         [SerializeField] private int _damage = 2;
+
+        [SerializeField] private float _visionRadius = 8;
 
         private float _health;
 
@@ -24,6 +26,7 @@ namespace NikolayTrofimov_StrategyGame.Core
 
         public int Damage => _damage;
 
+        public float VisionRadius => _visionRadius;
 
         private void Start()
         {
