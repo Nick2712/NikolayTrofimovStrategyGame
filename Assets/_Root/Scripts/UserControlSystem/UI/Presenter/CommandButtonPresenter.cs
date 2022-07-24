@@ -33,7 +33,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Presenter
         private void OnSelected(ISelectable selectable)
         {
             if (_currentSelectable == selectable) return;
-            if (_currentSelectable != null) _model.OnSelectionChanged();
+            if (_currentSelectable != null) _model.OnSelectionChanged(selectable);
             _currentSelectable = selectable;
 
             _view.Clear();
