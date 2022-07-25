@@ -63,7 +63,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             _commandIsPending = false;
             ProcessOnCancel();
 
-            _currentSelectable = _vector3Value.ReactiveValue.Subscribe(_ => RMBMoveCommand(selectable));
+            if (_currentSelectable != null)
+                _currentSelectable = _vector3Value.ReactiveValue.Subscribe(_ => RMBMoveCommand(selectable));
         }
 
         private void RMBMoveCommand(ISelectable selectable)
