@@ -20,6 +20,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
         [Inject] private CommandCreatorBase<IPatrolCommand> _patroller;
         [Inject] private CommandCreatorBase<ISetRallyPointCommand> _setrallyPoint;
+        [Inject] private CommandCreatorBase<IProduceUnit2Command> _unit2Producer;
+        [Inject] private CommandCreatorBase<ITeleportCommand> _teleport;
 
         [Inject] private Vector3Value _vector3Value;
 
@@ -40,6 +42,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _patroller.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _setrallyPoint.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _unit2Producer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _teleport.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
         }
 
         public void ExecuteCommandWrapper(object command, ICommandsQueue commandsQueue)
@@ -69,7 +73,6 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             _mover.ProcessCommandExecutor(moveExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
         }
 
-
         private void ProcessOnCancel()
         {
             _unitProducer.ProcessCancel();
@@ -78,6 +81,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             _mover.ProcessCancel();
             _patroller.ProcessCancel();
             _setrallyPoint.ProcessCancel();
+            _teleport.ProcessCancel();
 
             OnCommandCancel?.Invoke();
         }
