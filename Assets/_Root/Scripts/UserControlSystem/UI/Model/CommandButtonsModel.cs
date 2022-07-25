@@ -1,7 +1,9 @@
 using NikolayTrofimov_StrategyGame.Abstractions;
+using NikolayTrofimov_StrategyGame.Core;
 using System;
 using UnityEngine;
 using Zenject;
+using UniRx;
 
 
 namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
@@ -18,8 +20,14 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
         [Inject] private CommandCreatorBase<IPatrolCommand> _patroller;
         [Inject] private CommandCreatorBase<ISetRallyPointCommand> _setrallyPoint;
+        [Inject] private CommandCreatorBase<IProduceUnit2Command> _unit2Producer;
+        [Inject] private CommandCreatorBase<ITeleportCommand> _teleport;
+
+        [Inject] private Vector3Value _vector3Value;
 
         private bool _commandIsPending;
+
+        private IDisposable _currentSelectable;
 
 
         public void OnCommandButtonClicked(ICommandExecutor commandExecutor, ICommandsQueue commandsQueue)
@@ -34,6 +42,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _patroller.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
             _setrallyPoint.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _unit2Producer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+            _teleport.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
         }
 
         public void ExecuteCommandWrapper(object command, ICommandsQueue commandsQueue)
@@ -46,10 +56,22 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             OnCommandSent?.Invoke();
         }
 
-        public void OnSelectionChanged()
+        public void OnSelectionChanged(ISelectable selectable)
         {
+            _currentSelectable?.Dispose();
+
             _commandIsPending = false;
             ProcessOnCancel();
+
+            if (_currentSelectable != null)
+                _currentSelectable = _vector3Value.ReactiveValue.Subscribe(_ => RMBMoveCommand(selectable));
+        }
+
+        private void RMBMoveCommand(ISelectable selectable)
+        {
+            var moveExecutor = (selectable as Component).gameObject.GetComponent<ICommandExecutor<IMoveCommand>>();
+            var commandsQueue = (selectable as Component).gameObject.GetComponent<ICommandsQueue>();
+            _mover.ProcessCommandExecutor(moveExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
         }
 
         private void ProcessOnCancel()
@@ -60,6 +82,7 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             _mover.ProcessCancel();
             _patroller.ProcessCancel();
             _setrallyPoint.ProcessCancel();
+            _teleport.ProcessCancel();
 
             OnCommandCancel?.Invoke();
         }

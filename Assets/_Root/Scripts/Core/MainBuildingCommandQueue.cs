@@ -10,6 +10,8 @@ namespace NikolayTrofimov_StrategyGame.Core
         [Inject] CommandExecutorBase<IProduceUnitCommand> _produceUnitCommandExecutor;
         [Inject] CommandExecutorBase<ISetRallyPointCommand> _setRallyPointCommandExecutor;
 
+        public ICommand CurrentCommand => default;
+
 
         public void Clear()
         {

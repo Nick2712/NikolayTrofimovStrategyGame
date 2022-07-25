@@ -28,6 +28,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             Container.Bind<CommandCreatorBase<IStopCommand>>().To<StopCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IPatrolCommand>>().To<PatrolCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<ISetRallyPointCommand>>().To<SetRallyPointCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IProduceUnit2Command>>().To<ProduceUnit2CommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<ITeleportCommand>>().To<TeleportCommandCommandCreator>().AsTransient();
 
             Container.Bind<CommandButtonsModel>().AsTransient();
 
@@ -37,6 +39,10 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.Model
             Container.Bind<float>().WithId("Chomper").FromInstance(5f);
             Container.Bind<string>().WithId("Chomper").FromInstance("Chomper");
             Container.Bind<Sprite>().WithId("Chomper").FromInstance(_chomperSprite);
+
+            Container.Bind<float>().WithId("Chomper 1").FromInstance(5f);
+            Container.Bind<string>().WithId("Chomper 1").FromInstance("Chomper 1");
+            Container.Bind<Sprite>().WithId("Chomper 1").FromInstance(_chomperSprite);
 
             Container.Bind<BottomCenterModel>().AsSingle();
         }

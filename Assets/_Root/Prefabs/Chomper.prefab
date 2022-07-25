@@ -3007,6 +3007,9 @@ GameObject:
   - component: {fileID: 6217294871140169198}
   - component: {fileID: -8281333768975461703}
   - component: {fileID: -2309827723309047174}
+  - component: {fileID: 2341447546259919196}
+  - component: {fileID: -248987171850758984}
+  - component: {fileID: 5453193506123462612}
   m_Layer: 0
   m_Name: Chomper
   m_TagString: Untagged
@@ -3069,6 +3072,7 @@ MonoBehaviour:
   _animator: {fileID: 6193723181260180522}
   _stopCommand: {fileID: 3685101011312804116}
   _damage: 2
+  _visionRadius: 8
 --- !u!114 &6765891705466112852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3231,6 +3235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _factionId: 0
+  _instanceId: 0
 --- !u!114 &-2309827723309047174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3243,6 +3248,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f746575847919448a9cf6e2b5412fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackerParallelInfoUpdater: {fileID: 2341447546259919196}
+  _factionMemberParallelInfoUpdater: {fileID: -248987171850758984}
+--- !u!114 &2341447546259919196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193723181267484648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3c21cd8f244af49b809a06b1f6745f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-248987171850758984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193723181267484648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70d0a914be433d458c1b7d33ac4c404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5453193506123462612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193723181267484648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29000359e7b21e443b137a11976132ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _queue: {fileID: -6121995892556096241}
 --- !u!1 &6193723181267484650
 GameObject:
   m_ObjectHideFlags: 0

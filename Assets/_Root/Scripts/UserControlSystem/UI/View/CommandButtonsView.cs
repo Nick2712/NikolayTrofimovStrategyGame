@@ -18,6 +18,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.View
         [SerializeField] private GameObject _stopButton;
         [SerializeField] private GameObject _produceUnitButton;
         [SerializeField] private GameObject _setRallyPointButton;
+        [SerializeField] private GameObject _produceUnit2Button;
+        [SerializeField] private GameObject _teleportButton;
 
         private Dictionary<Type, GameObject> _buttonsByExecutorType;
 
@@ -32,6 +34,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.View
             _buttonsByExecutorType.Add(typeof(ICommandExecutor<IStopCommand>), _stopButton);
             _buttonsByExecutorType.Add(typeof(ICommandExecutor<IProduceUnitCommand>), _produceUnitButton);
             _buttonsByExecutorType.Add(typeof(ICommandExecutor<ISetRallyPointCommand>), _setRallyPointButton);
+            _buttonsByExecutorType.Add(typeof(ICommandExecutor<IProduceUnit2Command>), _produceUnit2Button);
+            _buttonsByExecutorType.Add(typeof(ICommandExecutor<ITeleportCommand>), _teleportButton);
         }
 
         public void BlockInteractions(ICommandExecutor ce)
@@ -53,6 +57,8 @@ namespace NikolayTrofimov_StrategyGame.UserControlSystem.View
             _stopButton.GetComponent<Selectable>().interactable = value;
             _produceUnitButton.GetComponent<Selectable>().interactable = value;
             _setRallyPointButton.GetComponent<Selectable>().interactable = value;
+            _produceUnit2Button.GetComponent<Selectable>().interactable = value;
+            _teleportButton.GetComponent<Selectable>().interactable = value;
         }
 
         public void MakeLayout(List<ICommandExecutor> commandExecutors, ICommandsQueue queue)

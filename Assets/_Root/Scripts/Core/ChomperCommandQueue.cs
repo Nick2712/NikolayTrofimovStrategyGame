@@ -12,9 +12,11 @@ namespace NikolayTrofimov_StrategyGame.Core
         [Inject] CommandExecutorBase<IPatrolCommand> _patrolCommandExecutor;
         [Inject] CommandExecutorBase<IAttackCommand> _attackCommandExecutor;
         [Inject] CommandExecutorBase<IStopCommand> _stopCommandExecutor;
+        [Inject] CommandExecutorBase<ITeleportCommand> _teleportCommandExecutor;
 
         private ReactiveCollection<ICommand> _innerCollection = new ReactiveCollection<ICommand>();
 
+        public ICommand CurrentCommand => _innerCollection.Count > 0 ? _innerCollection[0] : default;
 
         [Inject]
         private void Init()
@@ -33,6 +35,7 @@ namespace NikolayTrofimov_StrategyGame.Core
             await _patrolCommandExecutor.TryExecuteCommand(command);
             await _attackCommandExecutor.TryExecuteCommand(command);
             await _stopCommandExecutor.TryExecuteCommand(command);
+            await _teleportCommandExecutor.TryExecuteCommand(command);
             if (_innerCollection.Count > 0) _innerCollection.RemoveAt(0);
             CheckTheQueue();
         }
